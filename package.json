@@ -1,0 +1,17 @@
+{
+  "name": "nodeapi",
+  "version": "1.0.0",
+  "description": "Decoupled nodejs API server",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "somenath dey",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.18.1",
+    "bookshelf": "^0.10.4",
+    "express": "^4.15.4",
+    "knex": "^0.13.0"
+  }
+}
