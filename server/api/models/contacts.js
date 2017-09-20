@@ -1,10 +1,14 @@
 'use strict';
 const CONTACTS_COLLECTION = 'contacts'; 
-module.exports = {
-    fetchAllContacts : function (db) {
-        return db.collection(CONTACTS_COLLECTION).find({}).toArray(function(err, docs) {
-            if (err) throw err;
-            return docs;
-        });
-    }
+
+exports.fetchAllContacts = function (db, callback) {
+    db.collection(CONTACTS_COLLECTION).find({}).toArray(function(err, docs) {
+        return callback(err, docs);
+    });
 }
+exports.createContacts = function(db, newContact, callback) {
+    db.collection(CONTACTS_COLLECTION).insertOne(newContact, function(err, docs) {  
+     return callback(err, docs);
+    });
+}
+

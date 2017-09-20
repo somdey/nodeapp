@@ -19,21 +19,12 @@ var middleware = require('./middleware');
 app.use(middleware.bodyParser.json());
 
 app.get('/', function(req, res) {
-  console.log(db);
   res.send('Welcome to api server');
 });
 
 // API ROUTES BELOW
 
 require('./api/routes/contacts')(app);
-  
-  // app.post("/api/contacts", function(req, res) {
-  //   var newContact = req.body;
-  //   newContact.createDate = new Date();
-  
-  //   if (!req.body.name) {
-  //     handleError(res, "Invalid user input", "Must provide a name.", 400);
-  //   }
   
   //   db.collection(CONTACTS_COLLECTION).insertOne(newContact, function(err, doc) {
   //     if (err) {
