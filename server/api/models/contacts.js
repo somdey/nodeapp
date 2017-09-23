@@ -3,6 +3,8 @@ const CONTACTS_COLLECTION = 'contacts';
 
 //var ObjectID = require('mongodb').ObjectID;
 
+var database = require('../../db');
+
 var Mongoose = require("mongoose");
 
 var Schema = Mongoose.Schema;
@@ -21,9 +23,11 @@ var ContactsSchema = new Mongoose.Schema({
 var ContactsModel = Mongoose.model(CONTACTS_COLLECTION, ContactsSchema);
 
 exports.fetchAllContacts = function (db, callback) {
-  db.collection(CONTACTS_COLLECTION).find({}).toArray(function(err, docs) {
-    return callback(err, docs);
-  });
+    database.getDb(function(err, db) {
+        db.collection(CONTACTS_COLLECTION).find({}).toArray(function(err, docs) {
+            return callback(err, docs);
+        });
+    });
 }
 
 exports.createContact = function(req, newContact, callback) {
