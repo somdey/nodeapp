@@ -10,7 +10,7 @@ contactsController.handleError =  function (res, message, code) {
 }
 
 contactsController.listContacts = function (req, res) {
-  Contacts.fetchAllContacts(req.app.db, function(err, result){
+  Contacts.fetchAllContacts(function(err, result){
     if (err) contactsController.handleError(res, err, err, 500);
     res.json(result);
   });
@@ -22,7 +22,7 @@ contactsController.createContact = function (req, res) {
       contactsController.handleError(res, 'Request body is empty');
   } else {
     newContact.createDate = new Date();
-    Contacts.createContact(req, newContact, function(err, result) {
+    Contacts.createContact(newContact, function(err, result) {
         if (err) contactsController.handleError(res, err, err, 500);
         res.json(result);
     });
@@ -35,7 +35,7 @@ contactsController.findOneContact = function (req, res) {
       contactsController.handleError(res, 'Bad request');
   } else {
     id = req.params.id;
-    Contacts.findById(req.app.db, id, function(err, result) {
+    Contacts.findById(id, function(err, result) {
         if (err) contactsController.handleError(res, err);
         res.json(result);
     });
@@ -50,7 +50,7 @@ contactsController.updateContact = function (req, res) {
     id = req.params.id;
     var updateDoc = req.body;
     delete updateDoc._id;
-    Contacts.updateContact(req.app.db, id, updateDoc, function(err, result) {
+    Contacts.updateContact(id, updateDoc, function(err, result) {
       if (err) contactsController.handleError(res, err);
       res.json(result);
     });
@@ -63,7 +63,7 @@ contactsController.deleteContact = function (req, res) {
     contactsController.handleError(res, 'Bad request');
   } else {
     id = req.params.id;
-    Contacts.deleteContact(req.app.db, id, function(err, result) {
+    Contacts.deleteContact(id, function(err, result) {
       if (err) contactsController.handleError(res, err);
       res.json(result);
     });
