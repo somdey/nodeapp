@@ -10,6 +10,7 @@
   "author": "somenath dey",
   "license": "ISC",
   "dependencies": {
+    "api-version": "^0.2.0",
     "body-parser": "^1.18.1",
     "bookshelf": "^0.10.4",
     "express": "^4.15.4",
