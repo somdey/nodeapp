@@ -10,35 +10,35 @@ contactsController.handleError =  function (res, message, code) {
 }
 
 contactsController.listContacts = function (req, res) {
-  Contacts.fetchAllContacts(function(err, result) {
-    if (err) contactsController.handleError(res, err, err, 500);
-    res.json(result);
+  Contacts.fetchAllContacts().then(function(data) {
+    res.json(data);
+  }, function(err) {
+    contactsController.handleError(res, err, err, 500);
   });
 }
 
 contactsController.createContact = function (req, res) {
   var newContact = req.body;
-  if (middleware.isEmptyObject(newContact)) {
-      contactsController.handleError(res, 'Request body is empty');
+  if (newContact.name) {
+    Contacts.createContact(newContact).then(function(data) {
+      res.json(data);
+    }, function(err) {
+      contactsController.handleError(res, err, err, 500);
+    }); 
   } else {
-    newContact.createDate = new Date();
-    Contacts.createContact(newContact, function(err, result) {
-        if (err) contactsController.handleError(res, err, err, 500);
-        res.json(result);
-    });
+    contactsController.handleError(res, 'Request body is empty');
   }
 }
 
 contactsController.findOneContact = function (req, res) {
-  var id;
-  if (middleware.isEmptyObject(req.params)) {
-      contactsController.handleError(res, 'Bad request');
-  } else {
-    id = req.params.id;
-    Contacts.findById(id, function(err, result) {
-        if (err) contactsController.handleError(res, err);
-        res.json(result);
+  if (req.params.id) {
+    Contacts.findById(req.params.id).then(function(data) {
+      res.json(data);
+    }, function(err) {
+      contactsController.handleError(res, err, err, 500);
     });
+  } else {
+    contactsController.handleError(res, 'Bad request');
   }
 }
 
