@@ -1,48 +1,47 @@
 'use strict';
-const CONTACTS_COLLECTION = 'contacts'; 
-
-var ObjectID = require('mongodb').ObjectID;
-
-var database = require('../../db');
+var db = require('../../db');
  
-exports.fetchAllContacts = function (callback) {
-  database.getDb(function(err, db) {
-    db.collection(CONTACTS_COLLECTION).find({}).toArray(function(err, docs) {
-      return callback(err, docs);
-    });
+const CONTACTS_COLLECTION = 'contacts';
+
+var ContactsSchema = db.mongoose.Schema({
+  name: String,
+  createdDate: {
+    type: Date,
+    default: Date.now()
+  }
+}, { versionKey: false});
+
+var Contacts = db.mongoose.model(CONTACTS_COLLECTION, ContactsSchema);
+ 
+exports.createContact = function(newContact, callback) {
+  var contact = new Contacts(newContact);
+  contact.save(function (err, contact) {
+    return callback(err, contact);
   });
 }
 
-exports.createContact = function(newContact, callback) {
-  database.getDb(function(err, db) {
-    db.collection(CONTACTS_COLLECTION).insertOne(newContact, function(err, docs) {  
-      return callback(err, docs.ops[0]);
-    });
+exports.fetchAllContacts = function (callback) {
+  Contacts.find({}, "-__v", function (err, contacts) {
+    callback(err, contacts);
   });
 }
 
 exports.findById = function(id, callback) {
-  database.getDb(function(err, db) {
-    db.collection(CONTACTS_COLLECTION).findOne({ _id: new ObjectID(id) }, function(err, docs) {  
-      return callback(err, docs);
-    });
- });
+  Contacts.find({_id: id}, function (err, contacts) {
+    callback(err, contacts);
+  });
 }
 
 exports.updateContact = function(id, updateDoc, callback) {
-  database.getDb(function(err, db) {
-    db.collection(CONTACTS_COLLECTION).updateOne({_id: new ObjectID(id)}, updateDoc, function(err, docs) {
-      updateDoc._id = id;
-      return callback(err, updateDoc);
+  Contacts.update({_id: id}, updateDoc, function (err) {
+    Contacts.find({_id: id}, function (err, contacts) {
+      callback(err, contacts);
     });
   });
 }
 
 exports.deleteContact = function(id, callback) {
-  database.getDb(function(err, db) {
-    db.collection(CONTACTS_COLLECTION).deleteOne({_id: new ObjectID(id)}, function(err, result) { 
-      return callback(err, id);
-    });
+  Contacts.remove({_id: id}, function (err, contacts) {
+    callback(err, contacts);
   });
 }
-

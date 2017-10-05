@@ -10,7 +10,7 @@ contactsController.handleError =  function (res, message, code) {
 }
 
 contactsController.listContacts = function (req, res) {
-  Contacts.fetchAllContacts(function(err, result){
+  Contacts.fetchAllContacts(function(err, result) {
     if (err) contactsController.handleError(res, err, err, 500);
     res.json(result);
   });
