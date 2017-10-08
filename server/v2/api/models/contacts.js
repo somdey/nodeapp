@@ -55,16 +55,28 @@ exports.findById = function(id) {
   });
 }
 
-exports.updateContact = function(id, updateDoc, callback) {
-  Contacts.update({_id: id}, updateDoc, function (err) {
-    Contacts.find({_id: id}, function (err, contacts) {
-      callback(err, contacts);
+exports.updateContact = function(id, updateDoc) {
+  return new Promise(function(resolve, reject) {
+    Contacts.update({_id: id}, updateDoc, function (err) {
+      Contacts.find({_id: id}, function (err, contacts) {
+        if (err) {
+          reject(err);
+        } else {
+          resolve(contacts);
+        }
+      });
     });
   });
 }
 
-exports.deleteContact = function(id, callback) {
-  Contacts.remove({_id: id}, function (err, contacts) {
-    callback(err, contacts);
+exports.deleteContact = function(id) {
+  return new Promise(function(resolve, reject) {
+    Contacts.remove({_id: id}, function (err, contacts) {
+      if (err) {
+        reject(err);
+      } else {
+        resolve(contacts);
+      }
+    });
   });
 }
