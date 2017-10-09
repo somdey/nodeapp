@@ -29,5 +29,20 @@ userController.findOne = function (req, res) {
   }
 }
 
+userController.validate = function (req, res, next) {
+  req.checkBody('username', 'username can not be empty').notEmpty();
+  req.checkBody('password', 'password should be numeric').isNumeric();
+
+  var errors = req.validationErrors();
+  if (errors) {
+    var response = { errors: [] };
+    errors.forEach(function(err) {
+      response.errors.push(err.msg);
+    });
+    res.statusCode = 400;
+    return res.json(response);
+  }
+  return next();
+ }
 
 module.exports = userController;
