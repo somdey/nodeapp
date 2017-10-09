@@ -2,8 +2,7 @@ var apiv = require('api-version');
 var express = require("express");
 var app = express();
 
-var middleware = require('./middleware');
-app.use(middleware.bodyParser.json());
+require('./middleware')(app);
 
 var api = apiv.version(app, '/api', 'v1/');
 

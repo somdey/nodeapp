@@ -1,6 +1,5 @@
 'use strict';
 var db = require('../../db');
-var Promise = require('bluebird');
  
 const CONTACTS_COLLECTION = 'contacts';
 
@@ -43,7 +42,7 @@ exports.fetchAllContacts = function () {
 exports.findById = function(id) {
   return new Promise(function(resolve, reject) {
     Contacts.find({_id: id}, function (err, contacts) {
-      // Todo : We need to handle error in case invalid obj id. 
+      // Todo : We need to handle error in case of invalid obj id.
       console.log(err);
       console.log(contacts);
       if (err) {
