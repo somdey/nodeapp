@@ -1,13 +1,20 @@
 'use strict';
 var db = require('../../db');
+var bcrypt = require('bcrypt-nodejs');
  
 const COLLECTION = 'users';
 
 var userSchema = db.mongoose.Schema({
   name: String,
   email: String,
-  username: String,
-  password: String,
+  username: {
+    type: String,
+    required: true
+  },
+  password: {
+    type: String,
+    required: true
+  },
   createdDate: {
     type: Date,
     default: Date.now()
@@ -19,7 +26,7 @@ var Users = db.mongoose.model(COLLECTION, userSchema);
 exports.create = function(newUser, callback) {
   var user = new Users(newUser);
   user.save(function(err, user) {
-    if (err) callback(err); 
+    if (err) callback(err);
     callback(null, user);
   });
 }
