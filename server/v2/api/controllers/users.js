@@ -6,7 +6,7 @@ var userController = {};
 
 userController.create = function (req, res) {
   var newUser = req.body;
-  if (newUser.username && newUser.password) {
+  if (newUser.email && newUser.password) {
     Users.registerAsync(newUser).then(function(data) {
       res.json(data);
     }, function(err) {
@@ -17,20 +17,8 @@ userController.create = function (req, res) {
   }
 }
 
-userController.findOne = function (req, res) {
-  if (req.params.id) {
-    Users.findByIdAsync(req.params.id).then(function(data) {
-      res.json(data);
-    }, function(err) {
-      res.json({"error": err});
-    });
-  } else {
-    res.json({"error": "Property id is missing"});
-  }
-}
-
 userController.validate = function (req, res, next) {
-  req.checkBody('username', 'username can not be empty').notEmpty();
+  req.checkBody('email', 'username can not be empty').notEmpty();
   req.checkBody('password', 'password should be numeric').isNumeric();
 
   var errors = req.validationErrors();
