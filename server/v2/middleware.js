@@ -3,6 +3,7 @@ var flash = require('connect-flash');
 var session = require('express-session');
 var expressValidator = require('express-validator');
 var oauthserver = require('oauth2-server');
+var models = require('./api/models');
 
 module.exports = function (app) {
   app.use(bodyParser.urlencoded({ extended: true }));
@@ -17,10 +18,10 @@ module.exports = function (app) {
   app.use(expressValidator());
   // Create oauth server here.
   app.oauth = oauthserver({
-    model: {},
+    model: models.oauth, // See below for specification 
     grants: ['password'],
-    debug: true
+    debug: false
   });
-  app.all('/oauth/token', app.oauth.grant());
-  app.use(app.oauth.errorHandler());
+   
+  app.all('/api/v2/oauth/token', app.oauth.grant());
 }

@@ -1,9 +1,9 @@
 'use strict';
-var db = require('../../db');
+var mongoose = require('mongoose');
  
 const CONTACTS_COLLECTION = 'contacts';
 
-var ContactsSchema = db.mongoose.Schema({
+var ContactsSchema = mongoose.Schema({
   name: String,
   createdDate: {
     type: Date,
@@ -11,7 +11,7 @@ var ContactsSchema = db.mongoose.Schema({
   }
 }, { versionKey: false});
 
-var Contacts = db.mongoose.model(CONTACTS_COLLECTION, ContactsSchema);
+var Contacts = mongoose.model(CONTACTS_COLLECTION, ContactsSchema);
  
 exports.createContact = function(newContact) {
   return new Promise(function(resolve, reject) {

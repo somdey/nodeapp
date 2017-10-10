@@ -1,7 +1,7 @@
 'use strict';
 
-var Contacts = require('../models/contacts');
-
+var Model = require('../models');
+var Contacts = Model.Contacts;
 var contactsController = {};
 
 contactsController.handleError =  function (res, message, code) {

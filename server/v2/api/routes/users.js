@@ -1,10 +1,11 @@
 'use strict';
-var Users = require('../controllers/users');
+var User = require('../controllers').User;
 
 module.exports = function (app) {
     //app.get("contacts", Contacts.listContacts);
-    app.post("users", Users.validate, Users.create);
-    app.get("users/:id", Users.findOne);
+    app.post("users", User.validate, User.create);
+    app.get("users/:id", User.findOne);
     //app.put("contacts/:id", Contacts.updateContact);
     //app.delete("contacts/:id", Contacts.deleteContact);
+    
 }

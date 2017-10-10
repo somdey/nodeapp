@@ -1,13 +1,13 @@
 'use strict';
 
 var Promise = require('bluebird');
-var Users = Promise.promisifyAll(require('../models/users'));
+var Users = Promise.promisifyAll(require('../models').User);
 var userController = {};
 
 userController.create = function (req, res) {
   var newUser = req.body;
   if (newUser.username && newUser.password) {
-    Users.createAsync(newUser).then(function(data) {
+    Users.registerAsync(newUser).then(function(data) {
       res.json(data);
     }, function(err) {
       res.json({"error": err});

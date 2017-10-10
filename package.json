@@ -11,16 +11,17 @@
   "license": "ISC",
   "dependencies": {
     "api-version": "^0.2.0",
+    "bcrypt": "^1.0.3",
     "bcrypt-nodejs": "0.0.3",
     "bluebird": "^3.5.1",
     "body-parser": "^1.18.1",
     "bookshelf": "^0.10.4",
     "connect-flash": "^0.1.1",
-    "express": "^4.15.4",
+    "express": "^4.16.2",
     "express-session": "^1.15.6",
     "express-validator": "^4.2.1",
     "knex": "^0.13.0",
     "mongoose": "^4.12.0",
-    "oauth2-server": "^3.0.0"
+    "oauth2-server": "^2.4.1"
   }
 }

@@ -1,7 +1,5 @@
 'use strict';
 
-var middleware = require('../../middleware');
-
 var Promise = require('bluebird');
 var Contacts = Promise.promisifyAll(require('../models/contacts'));
 
