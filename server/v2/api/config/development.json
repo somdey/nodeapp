@@ -1,8 +1,0 @@
-{
-  "__comment_db" : "mongodb://demo-user:demo-user@ds143734.mlab.com:43734/nodeapi",
-  "db": "mongodb://localhost/nodeapi",
-  "emailer": {
-    "from": "somnath2prl@gmail.com"
-  },
-  "rootURL": "http://localhost:3001"
-}
