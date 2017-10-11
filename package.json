@@ -13,9 +13,11 @@
     "bluebird": "^3.5.1",
     "body-parser": "^1.18.1",
     "bookshelf": "^0.10.4",
+    "bookshelf-modelbase": "^2.10.4",
     "express": "^4.16.2",
     "express-session": "^1.15.6",
     "express-validator": "^4.2.1",
-    "knex": "^0.13.0"
+    "knex": "^0.13.0",
+    "pg": "^7.3.0"
   }
 }
