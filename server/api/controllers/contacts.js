@@ -19,8 +19,9 @@ contactsController.listContacts = function (req, res) {
 
 contactsController.createContact = function (req, res) {
   var newContact = req.body;
-  if (newContact.name) {
-    newContact.createDate = new Date();
+  if (newContact.first_name) {
+    newContact.created_at = new Date();
+    newContact.updated_at = new Date();
     Contacts.createContactAsync(newContact).then(function(data) {
       res.json(data);
     }, function(err) {

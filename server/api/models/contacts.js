@@ -5,9 +5,20 @@ var bookshelf = require('../../db');
 // Pass an initialized bookshelf instance
 var ModelBase = require('bookshelf-modelbase')(bookshelf);
 
+// We need to create the schema during deployment.
+// bookshelf.knex.schema.createTable(CONTACTS_COLLECTION, function(t) {
+//   t.increments('id');
+//   t.string('first_name');
+//   t.string('last_name');
+//   t.timestamps();
+// }).then(function (table) {
+//   console.log('Created Table', table);
+// });
+
 var Contacts = ModelBase.extend({
   tableName: CONTACTS_COLLECTION
 });
+
 
 // exports.fetchAllContacts = function (callback) {
 //   database.getDb(function(err, db) {
@@ -19,10 +30,10 @@ var Contacts = ModelBase.extend({
 
 exports.createContact = function(newContact, callback) {
   Contacts.create(newContact)
-  .then(function (err) {
-    callback(err);
-  }, function(result){
+  .then(function (result) {
     callback(null, result);
+  }, function(err){
+    callback(err);
   })
 }
 
