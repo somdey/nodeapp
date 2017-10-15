@@ -1,8 +1,7 @@
 var MongoClient = require('mongodb').MongoClient;
 var db;
 
-const dbUri = 'mongodb://demo-user:demo-user@ds143734.mlab.com:43734/nodeapi';
-//const dbUri = 'mongodb://localhost/nodeapi';
+const dbUri = '';
 
 // Initialize connection once
 var getDb = function (callback) {
