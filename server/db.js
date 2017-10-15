@@ -1,21 +1,12 @@
-var MongoClient = require('mongodb').MongoClient;
-var db;
-
-const dbUri = 'mongodb://demo-user:demo-user@ds143734.mlab.com:43734/nodeapi';
-//const dbUri = 'mongodb://localhost/nodeapi';
-
-// Initialize connection once
-var getDb = function (callback) {
-    if (db) {
-        return callback(null, db);
+var knex = require('knex')({
+    client: 'mysql',
+    connection: {
+      host     : '127.0.0.1',
+      user     : 'your_database_user',
+      password : 'your_database_password',
+      database : 'myapp_test',
+      charset  : 'utf8'
     }
-    MongoClient.connect(dbUri, function(err, database) {
-        if(err) callback(err);
-        db = database;
-        callback(null, db); 
-    });
-}
-
-module.exports = {
-    getDb
-}
+  });
+  
+ module.exports.bookshelf = require('bookshelf')(knex);
