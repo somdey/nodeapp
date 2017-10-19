@@ -9,5 +9,7 @@ require('./api/routes')(app, router);
 
 
 var port = process.env.PORT || 3000;
-app.listen(port);
-console.log("Listening on port "+ port);
+
+server.listen(port, function() {
+    console.log("App is running on port " + port);
+});
