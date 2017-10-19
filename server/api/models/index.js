@@ -13,7 +13,7 @@ var sequelize;
 if (env == 'development') {
   sequelize = new Sequelize(config.database, config.username, config.password, config);
 }else {
-  const sequelize = new Sequelize(config.DATABASE_URL);
+  sequelize = new Sequelize(config.DATABASE_URL);
 }
 
 
