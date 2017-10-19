@@ -8,8 +8,14 @@ var basename  = path.basename(__filename);
 var env       = process.env.NODE_ENV || 'development';
 var config    = require('../../config/db.js')[env];
 var db        = {};
+var sequelize;
 
-var sequelize = new Sequelize(config.database, config.username, config.password, config);
+if (env == 'development') {
+  sequelize = new Sequelize(config.database, config.username, config.password, config);
+}else {
+  const sequelize = new Sequelize(config.DATABASE_URL);
+}
+
 
 sequelize.authenticate()
 .then(() => {
