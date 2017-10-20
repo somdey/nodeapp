@@ -8,7 +8,7 @@ module.exports = {
     database: process.env.DB_NAME,
     host: process.env.DB_HOST,
     dialect: 'sqlite',
-    storage: 'nodeapi.sqlite'
+    storage: '../dev-nodeapi.sqlite'
   },
   test: {
     username: 'database_test',
