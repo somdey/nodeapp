@@ -7,35 +7,38 @@
     <div class="collapse navbar-collapse" id="navbarResponsive">
       <ul class="navbar-nav">
         <li class="nav-item dropdown">
-          <a class="nav-link" data-toggle="dropdown" href="#" id="themes">About me</a>
+          <a class="nav-link" href="/about-me">About me</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="../help/">Resume</a>
+          <a class="nav-link" href="/resume">Resume</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="http://blog.bootswatch.com">Blog</a>
+          <a class="nav-link" href="/blogs">Blog</a>
         </li>
       </ul>
-
       <ul class="nav navbar-nav ml-auto">
         <li class="nav-item">
           <a class="nav-link" href="https://github.com/smndey" target="_blank">Github</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="" target="_blank">Linkdin</a>
+          <a class="nav-link" href="https://www.linkedin.com/in/somenath-dey-58a2a873/" target="_blank">Linkdin</a>
+        </li>
+        <li class="nav-item">
+          <a [routerLink]="['/login']">Login</a>
         </li>
       </ul>
     </div>
   </div>
+  
 </div>
 
 
 <div class="container">
-
+  <router-outlet></router-outlet>
   <div class="page-header" id="banner">
     <div class="row">
       <div class="col-lg-8 col-md-7 col-sm-6">
-        <p class="lead">Code, Learning, Fun</p>
+        <p class="lead">Learn, Code, Fun</p>
       </div>
       <div class="col-lg-4 col-md-5 col-sm-6">
         <div class="sponsor">
@@ -45,4 +48,5 @@
       </div>
     </div>
   </div>
+</div>
 
