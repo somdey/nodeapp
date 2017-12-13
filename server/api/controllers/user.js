@@ -3,12 +3,12 @@
 var User = require('../models').User;
 
 module.exports = {
-  list : function (req, res) {
+  list :  (req, res) => {
     User.findAll().then(users => {
       res.json(users);
     })
   },
-  create : function(req, res) {
+  create : (req, res) => {
     if (req.body.email && req.body.password) {
       User.findOrCreate({where: {email: req.body.email}, defaults: req.body}).spread((user, created) => {
         res.json(user.get({
@@ -17,13 +17,16 @@ module.exports = {
       })
     }
   },
-  findById : function (req, res) {
+  findById : (req, res) => {
     res.json({'data': 'findbyid'});
   },
-  update : function(req, res) {
+  update : (req, res) => {
     res.json({'data': 'update'});
   },
-  delete : function(req, res) {
+  delete : (req, res) => {
     res.json({'data': 'delete'});
+  },
+  authenticate : (req, res) => {
+    res.json({'data': 'authenticate'});
   }
 }
