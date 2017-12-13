@@ -31,7 +31,7 @@ var HomeComponent = (function () {
     ], HomeComponent);
     return HomeComponent;
 }());
-//# sourceMappingURL=D:/projects/nodeapi/client/src/home.component.js.map
+//# sourceMappingURL=E:/projects/nodejs/client/src/home.component.js.map
 
 /***/ }),
 
@@ -66,7 +66,7 @@ var LoginComponent = (function () {
     ], LoginComponent);
     return LoginComponent;
 }());
-//# sourceMappingURL=D:/projects/nodeapi/client/src/login.component.js.map
+//# sourceMappingURL=E:/projects/nodejs/client/src/login.component.js.map
 
 /***/ }),
 
@@ -101,7 +101,7 @@ if (__WEBPACK_IMPORTED_MODULE_2__environments_environment__["a" /* environment *
     __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__angular_core__["a" /* enableProdMode */])();
 }
 __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__["a" /* platformBrowserDynamic */])().bootstrapModule(__WEBPACK_IMPORTED_MODULE_3__app_app_module__["a" /* AppModule */]);
-//# sourceMappingURL=D:/projects/nodeapi/client/src/main.js.map
+//# sourceMappingURL=E:/projects/nodejs/client/src/main.js.map
 
 /***/ }),
 
@@ -135,7 +135,7 @@ var AppComponent = (function () {
     ], AppComponent);
     return AppComponent;
 }());
-//# sourceMappingURL=D:/projects/nodeapi/client/src/app.component.js.map
+//# sourceMappingURL=E:/projects/nodejs/client/src/app.component.js.map
 
 /***/ }),
 
@@ -192,7 +192,7 @@ var AppModule = (function () {
     ], AppModule);
     return AppModule;
 }());
-//# sourceMappingURL=D:/projects/nodeapi/client/src/app.module.js.map
+//# sourceMappingURL=E:/projects/nodejs/client/src/app.module.js.map
 
 /***/ }),
 
@@ -215,7 +215,7 @@ var appRoutes = [
     { path: '**', redirectTo: '' }
 ];
 var routing = __WEBPACK_IMPORTED_MODULE_0__angular_router__["a" /* RouterModule */].forRoot(appRoutes);
-//# sourceMappingURL=D:/projects/nodeapi/client/src/app.routes.js.map
+//# sourceMappingURL=E:/projects/nodejs/client/src/app.routes.js.map
 
 /***/ }),
 
@@ -224,10 +224,14 @@ var routing = __WEBPACK_IMPORTED_MODULE_0__angular_router__["a" /* RouterModule 
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return environment; });
+// The file contents for the current environment will overwrite these during build.
+// The build system defaults to the dev environment which uses `environment.ts`, but if you do
+// `ng build --env=prod` then `environment.prod.ts` will be used instead.
+// The list of which env maps to which file can be found in `angular-cli.json`.
 var environment = {
-    production: true
+    production: false
 };
-//# sourceMappingURL=D:/projects/nodeapi/client/src/environment.prod.js.map
+//# sourceMappingURL=E:/projects/nodejs/client/src/environment.js.map
 
 /***/ }),
 
@@ -262,14 +266,14 @@ module.exports = "<div class=\"navbar navbar-expand-lg fixed-top navbar-dark bg-
 /***/ 675:
 /***/ (function(module, exports) {
 
-module.exports = "<p>\n  home works!\n</p>\n"
+module.exports = "<p>\r\n  home works!\r\n</p>\r\n"
 
 /***/ }),
 
 /***/ 676:
 /***/ (function(module, exports) {
 
-module.exports = "<p>\n  login works!\n</p>\n"
+module.exports = "<p>\r\n  login works!\r\n</p>\r\n"
 
 /***/ }),
 
