@@ -18,8 +18,11 @@
       "tsconfig": "tsconfig.json",
       "prefix": "app",
       "styles": [
-        "../node_modules/bootstrap/dist/css/bootstrap.min.css",
-        "styles.css"
+        "assets/vendor/bootstrap/css/bootstrap.min.css",
+        "assets/vendor/font-awesome/css/font-awesome.min.css",
+        "assets/vendor/devicons/css/devicons.min.css",
+        "assets/vendor/simple-line-icons/css/simple-line-icons.css",
+        "scss/styles.scss"
       ],
       "scripts": [],
       "environments": {
@@ -50,7 +53,7 @@
     }
   },
   "defaults": {
-    "styleExt": "css",
+    "styleExt": "scss",
     "prefixInterfaces": false,
     "inline": {
       "style": false,
