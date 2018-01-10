@@ -20,13 +20,13 @@ app.get('/', (req, res) => {
 app.use(express.static('public'));
 
 // Prefix www.
-// app.all('/*', (req, res, next) => {
-//   if (req.headers.host.match(/^www/) !== null ) {
-//     res.redirect('http://' + req.headers.host.replace(/^www\./, '') + req.url);
-//   } else {
-//     next();
-//   }
-// })
+app.all('/*', (req, res, next) => {
+  if (req.headers.host.match(/^www/) !== null ) {
+    res.redirect('http://' + req.headers.host.replace(/^www\./, '') + req.url);
+  } else {
+    next();
+  }
+})
 
 var port = process.env.PORT || 3000;
 
