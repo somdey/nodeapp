@@ -1,5 +1,5 @@
-FROM node:8
-
+# 
+FROM node:6
 # Go to app directory
 WORKDIR /usr/src/app
 
