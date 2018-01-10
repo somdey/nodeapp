@@ -1,18 +1,17 @@
 
 'use strict';
-const User = require('../controllers/user');
+const express = require('express');
+const app = express();
+const router = express.Router();
 
-module.exports = (app, router) => {
-  router.get('/', (req, res) => {
-    res.json({"Message": "Welcome to api"})
-  })
-  
-  router.get('/user', User.list);
-  router.post('/user', User.create);
-  router.get('/user/:id', User.findById);
-  router.put('/user/:id', User.update);
-  router.delete("/user/:id", User.delete);
-  router.post('/authenticate', User.authenticate);
+// Define routes.
+let routes = [
+  'users',
+  'posts'
+];
+let apiBasePath = '/api';
+routes.forEach(route => {
+  router.use(apiBasePath + '/' + route, require('./' + route));
+});
 
-  app.use('/api', router);
-}
+module.exports = router;

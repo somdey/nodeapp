@@ -2,16 +2,14 @@ const express = require("express");
 const app = express();
 const router = express.Router();
 
-// Router middleware, mentioned it before defining routes.
-router.use(function(req,res,next) {
-  console.log("/" + req.method);
-  next();
-});
+// Set base docroot.
+var path = require('path');
+global.appRoot = path.resolve(__dirname);
 
 require('./server/middleware')(app);
 
 // Backend #API routes.
-require('./server/api/routes')(app, router);
+app.use(require('./server/api/routes'));
 
 // Frontend #SPA.
 app.get('/', (req, res) => {
