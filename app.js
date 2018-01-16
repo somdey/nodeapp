@@ -6,11 +6,6 @@ const router = express.Router();
 var path = require('path');
 global.appRoot = path.resolve(__dirname);
 
-require('./server/middleware')(app);
-
-// Backend #API routes.
-app.use(require('./server/api/routes'));
-
 // Frontend #SPA.
 app.get('/', (req, res) => {
   res.sendFile('public/index.html', {root: __dirname });
@@ -27,6 +22,10 @@ app.all('/*', (req, res, next) => {
     next();
   }
 })
+
+require('./server/middleware')(app);
+// Backend #API routes.
+app.use(require('./server/api/routes'));
 
 var port = process.env.PORT || 3000;
 

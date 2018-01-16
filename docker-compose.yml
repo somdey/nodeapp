@@ -1,0 +1,15 @@
+version: '2'
+
+services:
+  nodejs:
+    build: .
+    container_name: nodeapp
+    environment:
+      - NODE_ENV=devlopment
+    volumes:
+      - . :/usr/src/app
+    ports:
+      - "8080:80"
+  mongo:
+    image: mongo
+    container_name: mongo-nodeapp
