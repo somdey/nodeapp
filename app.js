@@ -27,7 +27,7 @@ require('./server/middleware')(app);
 // Backend #API routes.
 app.use(require('./server/api/routes'));
 
-var port = process.env.PORT || 3000;
+var port = process.env.PORT || 80;
 
 app.listen(port, function() {
     console.log("App is running on port " + port);
