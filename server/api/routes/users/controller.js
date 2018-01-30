@@ -1,10 +1,18 @@
 const db = require(appRoot + '/server/config/connection');
 const User = require('./model')(db);
 
-module.exports = {
+let userControler = {
+  noList: (message) => {
+    return {'No record found': message};
+  },
   list :  (req, res) => {
     User.findAll().then(users => {
-      res.json(users);
+      if (users.length == 0) {
+        res.json(userControler.noList('User'));
+      } else {
+        res.json(users);
+      }
+      
     })
   },
   create : (req, res) => {
@@ -29,3 +37,5 @@ module.exports = {
     res.json({'data': 'authenticate'});
   }
 }
+
+module.exports = userControler;

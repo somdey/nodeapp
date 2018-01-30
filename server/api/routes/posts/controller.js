@@ -1,7 +1,7 @@
 const db = require(appRoot + '/server/config/connection');
 const Posts = require('./model')(db);
 
-module.exports = {
+let postsController = {
   list :  (req, res) => {
     Posts.findAll().then(posts => {
       res.json(posts);
@@ -23,3 +23,5 @@ module.exports = {
     res.json({'data': 'authenticate'});
   }
 }
+
+module.exports = postsController;
