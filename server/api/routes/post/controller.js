@@ -3,7 +3,7 @@ const Post = require(appRoot + "/server/api/models/postModel");
 
 let postsController = {
   list: (req, res) => {
-    Post.findAndCountAll({attributes: ['title', 'id', 'description'], offset:3, limit:2}).then(post => {
+    Post.findAndCountAll({attributes: ['id', 'title', 'description'], offset:3, limit:2}).then(post => {
       res.json({
         data: post.rows,
         count: post.count,

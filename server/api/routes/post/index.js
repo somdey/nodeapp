@@ -1,13 +1,13 @@
-const express = require('express');
+const express = require("express");
 const postsRouter = express.Router();
-const postsController = require('./controller');
-const upload = require(appRoot + "/server/middleware").upload;
+const postsController = require("./controller");
+const uploadMiddleware = require(appRoot + "/server/middleware").upload;
 
-postsRouter.route('/')
+postsRouter
+  .route("/")
   .get(postsController.list)
-  .post(upload.single('post_image'), postsController.create);
+  .post(uploadMiddleware.single("post_image"), postsController.create);
 
-postsRouter.route('/:id')
-  .get(postsController.findById);
+postsRouter.route("/:id").get(postsController.findById);
 
 module.exports = postsRouter;

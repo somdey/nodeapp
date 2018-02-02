@@ -1,17 +1,13 @@
-
-'use strict';
-const express = require('express');
+"use strict";
+const express = require("express");
 const app = express();
 const router = express.Router();
 
 // Define routes.
-let routes = [
-  'users',
-  'post'
-];
-let apiBasePath = '/api';
+let routes = ["users", "post"];
+let apiBasePath = "/api";
 routes.forEach(route => {
-  router.use(apiBasePath + '/' + route, require('./' + route));
+  router.use(apiBasePath + "/" + route, require("./" + route));
 });
 
 router.use((req, res, next) => {
