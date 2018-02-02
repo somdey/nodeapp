@@ -5,6 +5,7 @@ exports.up = function(knex, Promise) {
     t.integer('userId').notNull();
     t.string('title').notNull();
     t.string('description').nullable();
+    t.string('filename').nullable();
     t.dateTime('createdAt').notNull();
     t.dateTime('updatedAt').nullable();
   });

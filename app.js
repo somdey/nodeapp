@@ -23,7 +23,8 @@ app.all("/*", (req, res, next) => {
   }
 });
 
-require("./server/middleware")(app);
+app.use(require("./server/middleware").bodyParser);
+
 // Backend #API routes.
 app.use(require("./server/api/routes"));
 

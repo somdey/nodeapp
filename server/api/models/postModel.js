@@ -12,8 +12,16 @@ const Post = db.define(
     userId: {type: Sequelize.INTEGER},
     title: { type: Sequelize.STRING, allowNull: false },
     description: { type: Sequelize.STRING },
+    filename: {type: Sequelize.STRING},
     createdAt: Sequelize.DATE,
     updatedAt: Sequelize.DATE
+  },
+  {
+    getterMethods: {
+      self() {
+        return "http://localhost:3000/api/post/" + this.id;
+      }
+    }
   }
 );
 
