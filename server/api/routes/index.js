@@ -6,8 +6,8 @@ const router = express.Router();
 
 // Define routes.
 let routes = [
-  'users',
-  'posts'
+  'user',
+  'post'
 ];
 let apiBasePath = '/api';
 routes.forEach(route => {

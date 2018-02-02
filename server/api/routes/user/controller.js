@@ -1,5 +1,5 @@
-const db = require(appRoot + '/server/config/connection');
-const User = require('./model')(db);
+
+const Post = require(appRoot + '/server/api/models/userModel');
 
 let userControler = {
   noList: (message) => {
