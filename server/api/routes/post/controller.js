@@ -1,23 +1,25 @@
 "use strict";
+const nodeEnvBaseUrl = require(appRoot + "/server/config/config").baseUrl;
 const Post = require(appRoot + "/server/api/models/postModel");
-
+const paginate = require("express-paginate");
 let postsController = {
-  list: (req, res) => {
+  list: (req, res, next) => {
     Post.findAndCountAll({
       attributes: ["id", "title", "description"],
-      offset: 3,
-      limit: 2
+      offset: 0,
+      limit: req.query.limit
     }).then(post => {
+      const pageCount = Math.ceil(post.count / req.query.limit);
       res.json({
         data: post.rows,
         count: post.count,
         self: {
           title: "Self",
-          href: "http://localhost:3000/api/post/"
+          href: nodeEnvBaseUrl + req.baseUrl
         },
         next: {
           title: "Next",
-          href: "http://localhost:3000/api/post/"
+          href: nodeEnvBaseUrl + req.baseUrl
         }
       });
     });
@@ -33,8 +35,9 @@ let postsController = {
         .then(post => {
           res.json({
             data: post,
-            links: {
-              self: "http://localhost:3000/api/post/" + post.id
+            self: {
+              title: "Self",
+              href: nodeEnvBaseUrl + req.baseUrl
             }
           });
         })
