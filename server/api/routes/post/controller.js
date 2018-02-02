@@ -1,10 +1,9 @@
-const db = require(appRoot + '/server/config/connection');
-const Posts = require('./model')(db);
+const Post = require(appRoot + '/server/api/models/postModel');
 
-module.exports = {
+let postsController = {
   list :  (req, res) => {
-    Posts.findAll().then(posts => {
-      res.json(posts);
+    Post.findAll().then(post => {
+      res.json(post);
     })
   },
   create : (req, res) => {
@@ -23,3 +22,5 @@ module.exports = {
     res.json({'data': 'authenticate'});
   }
 }
+
+module.exports = postsController;

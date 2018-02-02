@@ -5,7 +5,8 @@
   "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node app.js"
+    "start": "node app.js",
+    "build": "nodemon app.js"
   },
   "author": "somenath dey",
   "license": "ISC",
@@ -19,6 +20,7 @@
     "express-validator": "^4.2.1",
     "jquery": "^3.2.1",
     "knex": "^0.13.0",
+    "knex-migrate": "^1.5.1",
     "mysql2": "^1.4.2",
     "pg": "^7.3.0",
     "pg-hstore": "^2.3.2",

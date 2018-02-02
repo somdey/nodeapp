@@ -1,0 +1,16 @@
+version: '2'
+
+services:
+  nodejs:
+    build: .
+    container_name: nodeapp
+    environment:
+      - NODE_ENV=development
+    volumes:
+      - . :/usr/src/app
+    ports:
+      - "8080:80"
+    #command: bash -c "npm install sqlite3 && npm start"
+  mongo:
+    image: mongo
+    container_name: mongo-nodeapp
