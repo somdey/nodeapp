@@ -4,12 +4,27 @@ const Post = require(appRoot + "/server/api/models/postModel");
 const paginate = require("express-paginate");
 let postsController = {
   list: (req, res, next) => {
+    var limit = req.query.limit;
+    var page = req.query.page;
+    var offset = (page - 1) * limit;
     Post.findAndCountAll({
       attributes: ["id", "title", "description"],
-      offset: 0,
-      limit: req.query.limit
+      offset: offset,
+      limit: limit
     }).then(post => {
-      const pageCount = Math.ceil(post.count / req.query.limit);
+      const pageCount = Math.ceil(post.count / limit);
+      if (page < pageCount) {
+        var next = {
+          title: "Next",
+          href: nodeEnvBaseUrl + req.baseUrl + "?page=" + (page + 1)
+        };
+      }
+      if (page > 1) {
+        var previous = {
+          title: "Previous",
+          href: nodeEnvBaseUrl + req.baseUrl + "?page=" + (page - 1)
+        };
+      }
       res.json({
         data: post.rows,
         count: post.count,
@@ -17,10 +32,8 @@ let postsController = {
           title: "Self",
           href: nodeEnvBaseUrl + req.baseUrl
         },
-        next: {
-          title: "Next",
-          href: nodeEnvBaseUrl + req.baseUrl
-        }
+        previous: previous,
+        next: next
       });
     });
   },
