@@ -1,5 +1,6 @@
 const Sequelize = require("sequelize");
 const db = require(appRoot + "/server/config/connection");
+const Post = require("./postModel");
 const User = db.define(
   "users",
   {
@@ -28,4 +29,5 @@ const User = db.define(
   }
 );
 
+Post.belongsTo(User);
 module.exports = User;

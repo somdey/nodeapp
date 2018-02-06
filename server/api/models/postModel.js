@@ -1,5 +1,6 @@
 const Sequelize = require("sequelize");
 const db = require(appRoot + "/server/config/connection");
+const baseUrl = require(appRoot + "/server/config/config").getBaseUrl();
 const User = require("./userModel");
 const Post = db.define(
   "posts",
@@ -19,11 +20,10 @@ const Post = db.define(
   {
     getterMethods: {
       self() {
-        return "http://localhost:3000/api/post/" + this.id;
+        return `${baseUrl}/api/post/${this.id}`;
       }
     }
   }
 );
 
-User.hasMany(Post, { as: "Posts" });
 module.exports = Post;

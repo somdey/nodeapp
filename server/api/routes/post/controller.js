@@ -1,6 +1,7 @@
 "use strict";
-const nodeEnvBaseUrl = require(appRoot + "/server/config/config").getBaseUrl();
+const baseUrl = require(appRoot + "/server/config/config").getBaseUrl();
 const Post = require(appRoot + "/server/api/models/postModel");
+const User = require(appRoot + "/server/api/models/userModel");
 const paginate = require("express-paginate");
 let postsController = {
   list: (req, res, next) => {
@@ -8,7 +9,15 @@ let postsController = {
     var page = req.query.page;
     var offset = (page - 1) * limit;
     Post.findAndCountAll({
-      attributes: ["id", "title", "description"],
+      // include: [
+      //   {
+      //     model: User,
+      //     through: {
+      //       attributes: ["firstName", "lastName", "email"]
+      //     }
+      //   }
+      // ],
+      attributes: ["id", "title", "description", "userId"],
       offset: offset,
       limit: limit
     }).then(post => {
@@ -16,13 +25,13 @@ let postsController = {
       if (page < pageCount) {
         var next = {
           title: "Next",
-          href: nodeEnvBaseUrl + req.baseUrl + "?page=" + (page + 1)
+          href: baseUrl + req.baseUrl + "?page=" + (page + 1)
         };
       }
       if (page > 1) {
         var previous = {
           title: "Previous",
-          href: nodeEnvBaseUrl + req.baseUrl + "?page=" + (page - 1)
+          href: baseUrl + req.baseUrl + "?page=" + (page - 1)
         };
       }
       res.json({
@@ -30,7 +39,7 @@ let postsController = {
         count: post.count,
         self: {
           title: "Self",
-          href: nodeEnvBaseUrl + req.baseUrl
+          href: baseUrl + req.baseUrl
         },
         previous: previous,
         next: next
