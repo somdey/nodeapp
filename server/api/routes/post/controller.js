@@ -1,5 +1,5 @@
 "use strict";
-const nodeEnvBaseUrl = require(appRoot + "/server/config/config").baseUrl;
+const nodeEnvBaseUrl = require(appRoot + "/server/config/config").getBaseUrl();
 const Post = require(appRoot + "/server/api/models/postModel");
 const paginate = require("express-paginate");
 let postsController = {
