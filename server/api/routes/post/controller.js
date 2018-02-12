@@ -46,8 +46,8 @@ let postsController = {
       });
     });
   },
-  create: (req, res) => {
-    if (req.body && req.file) {
+  create: (req, res, next) => {   
+    if (req.body) {
       Post.create({
         userId: req.body.userId,
         title: req.body.title,
@@ -59,25 +59,11 @@ let postsController = {
             data: post,
             self: {
               title: "Self",
-              href: nodeEnvBaseUrl + req.baseUrl
+              href: baseUrl + req.baseUrl
             }
           });
         })
-        .catch(err => {
-          res.status(500).json({
-            Error: {
-              Request: "Internal server error",
-              Message: err
-            }
-          });
-        });
-    } else {
-      res.status(400).json({
-        Error: {
-          Request: "Bad request",
-          Message: "Please provide input"
-        }
-      });
+        .catch(next)
     }
   },
   findById: (req, res) => {
