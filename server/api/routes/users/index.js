@@ -6,6 +6,7 @@
 const express = require("express");
 const userRouter = express.Router();
 const userController = require("./controller");
+const passport = require(appRoot + "/server/authentication");
 
 // you need to set mergeParams: true on the router,
 // if you want to access params from the parent router
@@ -15,7 +16,7 @@ userRouter.use("/:userId/posts", postsRouter);
 
 userRouter
   .route("/")
-  .get(userController.list)
+  .get(passport.authenticate('jwt', { session: false }), userController.list)
   .post(userController.create);
 
 userRouter.route("/:userId").get(userController.findById);

@@ -4,7 +4,7 @@ const app = express();
 const router = express.Router();
 
 // Define routes.
-let routes = ["users", "post"];
+let routes = ["users", "post", "login"];
 let apiBasePath = "/api";
 routes.forEach(route => {
   router.use(apiBasePath + "/" + route, require("./" + route));
