@@ -23,12 +23,13 @@ app.all("/*", (req, res, next) => {
   }
 });
 
-require("./server/middleware")(app);
+app.use(require("./server/middleware").bodyParser);
+
 // Backend #API routes.
 app.use(require("./server/api/routes"));
 
 var port = process.env.PORT || 3000;
 
-app.listen(port, function() {
+app.listen(port, function () {
   console.log("App is running on port " + port);
 });
