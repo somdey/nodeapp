@@ -1,4 +1,4 @@
-# sample azure pipelie
+# sample azure pipelie for node.js
 
 
 trigger:
@@ -95,4 +95,19 @@ stages:
         containerRegistry: $(dockerRegistryServiceConnection)
         tags: |
           $(tag)
-          
+
+- stage: Deploy
+  displayName: Deploy
+  jobs:  
+  - job: Deploy
+    displayName: Deploy
+    pool:
+      vmImage: $(vmImageName)
+    steps:
+    - task: Kubernetes@1
+      inputs:
+        connectionType: 'Kubernetes Service Connection'
+        kubernetesCluster: ""
+        command: apply
+        secretType: 'dockerRegistry'
+        containerRegistryType: 'Azure Container Registry'
