@@ -54,7 +54,7 @@ stages:
           command: ci
           workingDir: string # Working folder that contains package.json.
 
-- stage: Sonar Analysis
+- stage: Sonar_Analysis
   displayName: Sonar Analysis
   jobs:
   - job: SonarQube
