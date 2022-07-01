@@ -1,6 +1,5 @@
-# Docker
-# Build a Docker image
-# https://docs.microsoft.com/azure/devops/pipelines/languages/docker
+# sample azure pipelie
+
 
 trigger:
 - master
@@ -27,3 +26,15 @@ stages:
         dockerfile: '$(Build.SourcesDirectory)/Dockerfile'
         tags: |
           $(tag)
+    - task: DotNetCoreCLI@2
+      inputs:
+        command: 'build'
+    - task: AzureCloudPowerShellDeployment@1
+      inputs:
+        EnableAdvancedStorageOptions: false
+        CsPkg: 
+        slotName: 'Production'
+        AllowUpgrade: true
+    - task: KubernetesManifest@0
+      inputs:
+        action: 'deploy'
