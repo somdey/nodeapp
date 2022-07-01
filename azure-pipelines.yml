@@ -79,7 +79,7 @@ stages:
         inputs:
           pollingTimeoutSec: '300'
       
-- stage: Docker push
+- stage: Docke_Push
   displayName: Docker push
   jobs:  
   - job: Push
