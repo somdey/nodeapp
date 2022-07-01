@@ -26,15 +26,59 @@ stages:
         dockerfile: '$(Build.SourcesDirectory)/Dockerfile'
         tags: |
           $(tag)
-    - task: DotNetCoreCLI@2
-      inputs:
-        command: 'build'
-    - task: AzureCloudPowerShellDeployment@1
-      inputs:
-        EnableAdvancedStorageOptions: false
-        CsPkg: 
-        slotName: 'Production'
-        AllowUpgrade: true
-    - task: KubernetesManifest@0
-      inputs:
-        action: 'deploy'
+
+- stage: EsLint
+  displayName: Npm run esLint
+  jobs:
+  - job: EsLint
+    displayName: EsLint
+    pool:
+      vmImage: ubuntu-latest
+    steps:
+      - task: Npm@1
+        inputs:
+          command: custom
+          workingDir: string # Working folder that contains package.json.
+          customCommand: npm run lint
+
+- stage: Npm run test
+  displayName: Npm run test
+  jobs:
+  - job: Test
+    displayName: Test
+    pool:
+      vmImage: ubuntu-latest
+    steps:
+      - task: Npm@1
+        inputs:
+          command: ci
+          workingDir: string # Working folder that contains package.json.
+
+- stage: Npm run test
+  displayName: Npm run test
+  jobs:
+  - job: Test
+    displayName: Test
+    pool:
+      vmImage: ubuntu-latest
+    steps:
+      # Prepare Analysis Configuration task
+      - task: SonarQubePostTest@1
+        inputs:
+           
+          SonarQube: 'YourSonarqubeServerEndpoint'
+          scannerMode: 'CLI'
+          configMode: 'manual'
+          cliProjectKey: 'YourProjectKey'
+
+      # Run Code Analysis task
+      - task: SonarQubeAnalyze@5
+
+      # Publish Quality Gate Result task
+      - task: SonarQubePublish@5
+        inputs:
+          pollingTimeoutSec: '300'
+      
+      
+
+          
