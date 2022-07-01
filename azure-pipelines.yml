@@ -41,7 +41,7 @@ stages:
           workingDir: string # Working folder that contains package.json.
           customCommand: npm run lint
 
-- stage: Npm run test
+- stage: Test
   displayName: Npm run test
   jobs:
   - job: Test
