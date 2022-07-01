@@ -54,16 +54,16 @@ stages:
           command: ci
           workingDir: string # Working folder that contains package.json.
 
-- stage: Npm run test
-  displayName: Npm run test
+- stage: Sonar Analysis
+  displayName: Sonar Analysis
   jobs:
-  - job: Test
-    displayName: Test
+  - job: SonarQube
+    displayName:  Sonar Analysis
     pool:
       vmImage: ubuntu-latest
     steps:
       # Prepare Analysis Configuration task
-      - task: SonarQubePostTest@1
+      - task: SonarQubePostTest@5
         inputs:
            
           SonarQube: 'YourSonarqubeServerEndpoint'
@@ -79,6 +79,20 @@ stages:
         inputs:
           pollingTimeoutSec: '300'
       
-      
-
+- stage: Docker push
+  displayName: Docker push
+  jobs:  
+  - job: Push
+    displayName: Docker push
+    pool:
+      vmImage: $(vmImageName)
+    steps:
+    - task: Docker@2
+      displayName: Push an image to container registry
+      inputs:
+        command: push
+        repository: $(imageRepository)
+        containerRegistry: $(dockerRegistryServiceConnection)
+        tags: |
+          $(tag)
           
